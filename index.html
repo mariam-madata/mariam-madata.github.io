@@ -1,1382 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mariam Khamis Madata — Data Scientist</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mariam Khamis Madata — Data Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #1A3A6B;
+    --teal: #0E7C7B;
+    --teal-light: #E0F4F4;
+    --cream: #FAFAF8;
+    --white: #FFFFFF;
+    --gray-100: #F5F5F3;
+    --gray-300: #D1D1CC;
+    --gray-500: #888884;
+    --gray-700: #444440;
+    --black: #1A1A18;
+    --accent: #C8410A;
+  }
 
-    :root {
-      --ink:       #0f1923;
-      --ink-soft:  #4a5568;
-      --ink-faint: #8a9ab0;
-      --bg:        #f7f9fb;
-      --card:      #ffffff;
-      --accent:    #1a6b5a;
-      --accent2:   #e8f4f0;
-      --gold:      #c9933a;
-      --border:    #e2e8f0;
-      --font-display: 'DM Serif Display', serif;
-      --font-body:    'Inter', sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
 
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.7;
-      font-size: 16px;
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--black);
+    line-height: 1.6;
+  }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: rgba(247,249,251,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      padding: 0 2rem;
-      height: 60px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-name {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--accent);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--ink-soft);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(250,250,248,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-300);
+    z-index: 100;
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--gray-700); text-decoration: none;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
 
-    /* SECTIONS */
-    section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 6rem 2rem 4rem;
+    background: linear-gradient(135deg, var(--navy) 0%, #0D2247 60%, #0a3d3c 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(14,124,123,0.25) 0%, transparent 60%);
+  }
+  .hero-grid {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal-light);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 28px; height: 2px; background: var(--teal);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    color: var(--white); line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 span { color: #5BC8C7; }
+  .hero-desc {
+    font-size: 1.05rem; color: rgba(255,255,255,0.72);
+    line-height: 1.7; margin-bottom: 2rem; max-width: 480px;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: white;
+    padding: 0.75rem 1.6rem; border-radius: 4px;
+    font-size: 0.9rem; font-weight: 600;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #0a6665; }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.4); color: white;
+    padding: 0.75rem 1.6rem; border-radius: 4px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: border-color 0.2s;
+  }
+  .btn-outline:hover { border-color: white; }
 
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding-top: 80px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .hero-tag {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex; align-items: center; gap: 0.6rem;
-    }
-    .hero-tag::before {
-      content: '';
-      display: inline-block;
-      width: 28px; height: 2px;
-      background: var(--accent);
-    }
-    h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.6rem, 6vw, 4.2rem);
-      line-height: 1.12;
-      color: var(--ink);
-      margin-bottom: 1.4rem;
-    }
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-bio {
-      font-size: 1.05rem;
-      color: var(--ink-soft);
-      max-width: 560px;
-      margin-bottom: 2.4rem;
-      line-height: 1.8;
-    }
-    .hero-cta {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.7rem 1.6rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-primary:hover { background: #145548; transform: translateY(-1px); }
-    .btn-outline {
-      border: 1.5px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-    }
-    .btn-outline:hover { background: var(--accent2); }
+  /* STATS CARD */
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .stat-cell {
+    background: rgba(255,255,255,0.05);
+    padding: 1.8rem 1.5rem;
+    transition: background 0.2s;
+  }
+  .stat-cell:hover { background: rgba(255,255,255,0.1); }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem; color: #5BC8C7;
+    line-height: 1; margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-size: 0.8rem; color: rgba(255,255,255,0.6);
+    font-weight: 500; letter-spacing: 0.02em; line-height: 1.3;
+  }
 
-    .hero-stats {
-      display: flex; gap: 2.5rem; margin-top: 3.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-    .stat-item { display: flex; flex-direction: column; }
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .stat-num span { color: var(--accent); }
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--ink-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 0.3rem;
-    }
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--navy); margin-bottom: 1rem;
+  }
+  .section-divider {
+    width: 48px; height: 3px;
+    background: var(--teal); margin-bottom: 3rem;
+  }
 
-    /* SECTION TITLES */
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      color: var(--ink);
-      margin-bottom: 2rem;
-      line-height: 1.2;
-    }
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-grid {
+    display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start;
+  }
+  .about-text p {
+    font-size: 1.05rem; color: var(--gray-700);
+    line-height: 1.8; margin-bottom: 1.2rem;
+  }
+  .about-text p strong { color: var(--navy); }
+  .interests-wrap { margin-top: 1.5rem; }
+  .interests-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gray-500); margin-bottom: 0.8rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: var(--teal-light); color: var(--teal);
+    padding: 0.35rem 0.9rem; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 500;
+  }
+  .about-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+  .status-card {
+    background: var(--gray-100); border-radius: 10px;
+    padding: 1.4rem; border-left: 3px solid var(--teal);
+  }
+  .status-card h4 {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gray-500); margin-bottom: 0.8rem;
+  }
+  .status-item {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    font-size: 0.9rem; color: var(--gray-700);
+    margin-bottom: 0.5rem; line-height: 1.4;
+  }
 
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-    .about-text p { color: var(--ink-soft); margin-bottom: 1rem; line-height: 1.8; }
-    .about-interests { }
-    .interest-tag {
-      display: inline-block;
-      background: var(--accent2);
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 500;
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      margin: 0.25rem 0.25rem 0.25rem 0;
-    }
-    .interests-title {
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--ink-faint);
-      margin-bottom: 0.8rem;
-    }
+  /* SKILLS */
+  .skills { background: var(--cream); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--white); border-radius: 10px;
+    padding: 1.6rem; border: 1px solid var(--gray-300);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .skill-card:hover {
+    box-shadow: 0 8px 24px rgba(26,58,107,0.1);
+    transform: translateY(-2px);
+  }
+  .skill-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .skill-card h4 {
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--navy); margin-bottom: 0.8rem;
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    font-size: 0.88rem; color: var(--gray-700);
+    padding: 0.2rem 0; display: flex; align-items: center; gap: 0.4rem;
+  }
+  .skill-list li::before {
+    content: ''; display: block;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--teal); flex-shrink: 0;
+  }
 
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.2rem;
-    }
-    .skill-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.4rem;
-    }
-    .skill-card-title {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .skill-icon { font-size: 1.1rem; }
-    .skill-list {
-      display: flex; flex-wrap: wrap; gap: 0.4rem;
-    }
-    .skill-pill {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: var(--bg);
-      color: var(--ink-soft);
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-    }
+  /* PROJECTS */
+  .projects { background: var(--white); }
+  .project-card {
+    background: var(--gray-100); border-radius: 12px;
+    padding: 2.5rem; border: 1px solid var(--gray-300);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+  }
+  .project-eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .project-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: var(--navy);
+    margin-bottom: 0.8rem; line-height: 1.25;
+  }
+  .project-card p {
+    font-size: 0.95rem; color: var(--gray-700);
+    line-height: 1.7; margin-bottom: 1.5rem;
+  }
+  .project-metrics {
+    display: flex; gap: 2rem; margin-bottom: 1.5rem;
+  }
+  .metric { text-align: center; }
+  .metric-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: var(--teal); line-height: 1;
+  }
+  .metric-label {
+    font-size: 0.72rem; color: var(--gray-500);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .project-tag {
+    background: var(--navy); color: white;
+    padding: 0.25rem 0.7rem; border-radius: 3px;
+    font-size: 0.75rem; font-weight: 500;
+  }
+  .btn-github {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--navy); color: white;
+    padding: 0.6rem 1.2rem; border-radius: 4px;
+    font-size: 0.85rem; font-weight: 600;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .btn-github:hover { background: var(--teal); }
 
-    /* PROJECTS */
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.4rem;
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .project-card:hover {
-      box-shadow: 0 8px 32px rgba(26,107,90,0.08);
-      transform: translateY(-2px);
-    }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: var(--accent);
-    }
-    .project-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: var(--accent2);
-      color: var(--accent);
-      padding: 0.2rem 0.7rem;
-      border-radius: 100px;
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .project-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      margin-bottom: 0.6rem;
-      color: var(--ink);
-    }
-    .project-desc {
-      color: var(--ink-soft);
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-      line-height: 1.7;
-    }
-    .project-metrics {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      margin-bottom: 1.2rem;
-    }
-    .metric {
-      display: flex; flex-direction: column;
-    }
-    .metric-val {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .metric-label {
-      font-size: 0.72rem;
-      color: var(--ink-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
-    .project-tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      background: var(--bg);
-      color: var(--ink-soft);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-    }
-    .project-link {
-      font-size: 0.875rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex; align-items: center; gap: 0.3rem;
-    }
-    .project-link:hover { text-decoration: underline; }
+  /* Architecture diagram */
+  .arch-diagram {
+    background: var(--navy); border-radius: 10px;
+    padding: 1.8rem; color: white;
+  }
+  .arch-title {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #5BC8C7; margin-bottom: 1.2rem;
+  }
+  .arch-flow { display: flex; flex-direction: column; gap: 0.5rem; }
+  .arch-step {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .arch-box {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px; padding: 0.5rem 0.9rem;
+    font-size: 0.82rem; color: white; flex: 1;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .arch-box.highlight {
+    background: rgba(14,124,123,0.4); border-color: var(--teal);
+  }
+  .arch-arrow { color: #5BC8C7; font-size: 1rem; flex-shrink: 0; text-align: center; width: 20px; }
+  .arch-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
 
-    /* PUBLICATION */
-    .pub-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.4rem;
-      align-items: start;
-      transition: box-shadow 0.2s;
-    }
-    .pub-card:hover { box-shadow: 0 8px 32px rgba(26,107,90,0.08); }
-    .pub-icon {
-      width: 48px; height: 48px;
-      background: var(--accent2);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-    }
-    .pub-venue {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-    }
-    .pub-title {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-    .pub-authors {
-      font-size: 0.85rem;
-      color: var(--ink-faint);
-      margin-bottom: 0.8rem;
-    }
-    .pub-authors strong { color: var(--ink-soft); }
-    .pub-abstract {
-      font-size: 0.88rem;
-      color: var(--ink-soft);
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
+  /* PUBLICATION */
+  .publication { background: var(--cream); }
+  .pub-card {
+    background: var(--white); border-radius: 12px;
+    padding: 2.5rem; border: 1px solid var(--gray-300);
+    border-left: 4px solid var(--teal);
+    display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;
+  }
+  .pub-badge {
+    background: var(--navy); color: white;
+    padding: 0.5rem 0.8rem; border-radius: 6px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; text-align: center; line-height: 1.4;
+  }
+  .pub-badge span { display: block; color: #5BC8C7; }
+  .pub-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem; color: var(--navy);
+    margin-bottom: 0.5rem; line-height: 1.35;
+  }
+  .pub-authors {
+    font-size: 0.88rem; color: var(--gray-500);
+    margin-bottom: 0.8rem; font-style: italic;
+  }
+  .pub-authors strong { color: var(--navy); font-style: normal; }
+  .pub-abstract {
+    font-size: 0.92rem; color: var(--gray-700);
+    line-height: 1.7; margin-bottom: 1.2rem;
+  }
+  .btn-ieee {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    border: 1.5px solid var(--navy); color: var(--navy);
+    padding: 0.55rem 1.1rem; border-radius: 4px;
+    font-size: 0.82rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-ieee:hover { background: var(--navy); color: white; }
 
-    /* EDUCATION */
-    .edu-timeline { position: relative; padding-left: 1.5rem; }
-    .edu-timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 8px; bottom: 8px;
-      width: 2px; background: var(--border);
-    }
-    .edu-item {
-      position: relative;
-      margin-bottom: 2.4rem;
-    }
-    .edu-item::before {
-      content: '';
-      position: absolute;
-      left: -1.5rem; top: 6px;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--bg);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-    .edu-year {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--ink-faint);
-      margin-bottom: 0.3rem;
-    }
-    .edu-degree {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--ink);
-      margin-bottom: 0.2rem;
-    }
-    .edu-school {
-      font-size: 0.9rem;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 0.4rem;
-    }
-    .edu-detail {
-      font-size: 0.85rem;
-      color: var(--ink-faint);
-    }
-    .edu-badge {
-      display: inline-block;
-      background: #fdf3e3;
-      color: var(--gold);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.2rem 0.65rem;
-      border-radius: 100px;
-      margin-left: 0.5rem;
-    }
+  /* EDUCATION */
+  .education { background: var(--white); }
+  .edu-timeline { display: flex; flex-direction: column; gap: 0; }
+  .edu-item {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 2rem; padding: 2rem 0;
+    border-bottom: 1px solid var(--gray-300);
+    position: relative;
+  }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-year {
+    font-size: 0.82rem; color: var(--gray-500);
+    font-weight: 600; padding-top: 0.2rem;
+  }
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem; color: var(--navy); margin-bottom: 0.2rem;
+  }
+  .edu-grade {
+    display: inline-block; background: var(--teal-light);
+    color: var(--teal); padding: 0.15rem 0.6rem; border-radius: 3px;
+    font-size: 0.78rem; font-weight: 600; margin-bottom: 0.4rem;
+  }
+  .edu-school {
+    font-size: 0.95rem; color: var(--gray-700); margin-bottom: 0.6rem;
+  }
+  .edu-modules {
+    font-size: 0.85rem; color: var(--gray-500); line-height: 1.6;
+  }
 
-    /* CONTACT */
-    #contact {
-      background: var(--ink);
-      color: #fff;
-      max-width: 100%;
-      padding: 5rem 2rem;
-    }
-    .contact-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    #contact .section-label { color: #6ee7b7; }
-    #contact h2 { color: #fff; }
-    #contact p { color: #94a3b8; margin-bottom: 2rem; max-width: 480px; }
-    .contact-links {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-    }
-    .contact-link {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #e2e8f0;
-      padding: 0.75rem 1.4rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .contact-link:hover { background: rgba(255,255,255,0.12); }
+  /* CONTACT */
+  .contact {
+    background: var(--navy);
+    text-align: center; padding: 5rem 2rem;
+  }
+  .contact .section-eyebrow { color: #5BC8C7; }
+  .contact .section-title { color: white; margin-bottom: 0.8rem; }
+  .contact-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.65);
+    margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    color: white; text-decoration: none;
+    font-size: 0.95rem; font-weight: 500;
+    padding: 0.7rem 1.4rem; border-radius: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: var(--teal); border-color: var(--teal); }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
-      color: var(--ink-faint);
-      border-top: 1px solid var(--border);
-    }
+  /* FOOTER */
+  footer {
+    background: #0D1F3C; color: rgba(255,255,255,0.4);
+    text-align: center; padding: 1.5rem;
+    font-size: 0.82rem;
+  }
 
-    /* DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    @media (max-width: 640px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .pub-card { grid-template-columns: 1fr; }
-      .hero-stats { gap: 1.5rem; }
-      nav .nav-links { display: none; }
-    }
-  </style>
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid, .project-card, .pub-card { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .project-metrics { gap: 1rem; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+  }
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-name" href="#hero">Mariam Madata</a>
+  <a class="nav-logo" href="#">Mariam Madata</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#publication">Publication</a></li>
+    <li><a href="#publication">Research</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="hero-tag">Data Scientist · Data Analyst · Tanzania 🇹🇿</div>
-  <h1>Mariam Khamis<br><em>Madata</em></h1>
-  <p class="hero-bio">
-    MSc Data Science graduate building machine learning systems that work in the real world.
-    From wireless network optimization to medical image analysis — I turn data into decisions.
-  </p>
-  <div class="hero-cta">
-    <a href="#projects" class="btn btn-primary">View My Work</a>
-    <a href="#contact" class="btn btn-outline">Get In Touch</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat-item">
-      <span class="stat-num">83<span>%</span></span>
-      <span class="stat-label">Model Accuracy — DR Detection</span>
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Data Scientist · Tanzania 🇹🇿</div>
+      <h1>Turning data into <span>decisions</span> that matter.</h1>
+      <p class="hero-desc">MSc Data Science graduate building machine learning systems at the intersection of research and real-world impact — from wireless network optimisation to medical image analysis.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
     </div>
-    <div class="stat-item">
-      <span class="stat-num">1</span>
-      <span class="stat-label">Peer-Reviewed Publication</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">5<span>+</span></span>
-      <span class="stat-label">ML Architectures Used</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">3,662</span>
-      <span class="stat-label">Images Trained On</span>
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <div class="stat-num">83%</div>
+        <div class="stat-label">Model Accuracy — DR Detection</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Peer-Reviewed Publication</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">3,662</div>
+        <div class="stat-label">Retinal Images Trained On</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">ML Architectures Used</div>
+      </div>
     </div>
   </div>
 </section>
-
-<hr class="divider" />
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About Me</div>
-  <h2>Researcher. Analyst.<br>Problem Solver.</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>
-        I'm a data scientist from Dar es Salaam, Tanzania, with an MSc in Data Science
-        (First Class) from Chandigarh University, India. My work sits at the intersection
-        of machine learning research and real-world data analysis.
-      </p>
-      <p>
-        I've published research on deep learning for wireless networks, built computer
-        vision systems for medical diagnostics, and delivered data insights across
-        telecoms, consulting, and engineering sectors.
-      </p>
-      <p>
-        Currently exploring PhD opportunities in machine learning and AI while working
-        as a data and systems consultant in Dar es Salaam.
-      </p>
-    </div>
-    <div class="about-interests">
-      <div class="interests-title">Research Interests</div>
-      <span class="interest-tag">Deep Learning</span>
-      <span class="interest-tag">Computer Vision</span>
-      <span class="interest-tag">Medical Image Analysis</span>
-      <span class="interest-tag">Reinforcement Learning</span>
-      <span class="interest-tag">Explainable AI</span>
-      <span class="interest-tag">Wireless Networks</span>
-      <span class="interest-tag">Transfer Learning</span>
-      <span class="interest-tag">Data Analytics</span>
-      <br/><br/>
-      <div class="interests-title" style="margin-top:1rem">Currently</div>
-      <p style="font-size:0.88rem; color:var(--ink-soft); line-height:1.7;">
-        📍 Based in Dar es Salaam<br/>
-        🎓 Applying for PhD positions<br/>
-        💻 Open to remote data roles<br/>
-        🌍 Open to relocation worldwide
-      </p>
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-eyebrow">About Me</div>
+        <h2 class="section-title">Researcher. Analyst.<br>Problem Solver.</h2>
+        <div class="section-divider"></div>
+        <p>I'm a data scientist from Dar es Salaam, Tanzania, with an <strong>MSc in Data Science (First Class)</strong> from Chandigarh University, India. My work sits at the intersection of machine learning research and real-world data analysis.</p>
+        <p>I've published research on deep learning for wireless networks, built computer vision systems for medical diagnostics, and delivered data insights across telecoms, consulting, and engineering sectors.</p>
+        <p>Currently exploring <strong>PhD opportunities in machine learning and AI</strong> while working as a data and systems consultant in Dar es Salaam.</p>
+        <div class="interests-wrap">
+          <div class="interests-label">Research Interests</div>
+          <div class="tags">
+            <span class="tag">Deep Learning</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Medical Image Analysis</span>
+            <span class="tag">Transfer Learning</span>
+            <span class="tag">Explainable AI</span>
+            <span class="tag">Wireless Networks</span>
+            <span class="tag">Data Analytics</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-sidebar">
+        <div class="status-card">
+          <h4>Currently</h4>
+          <div class="status-item">📍 Based in Dar es Salaam</div>
+          <div class="status-item">🎓 Applying for PhD positions in ML & AI</div>
+          <div class="status-item">💻 Open to remote data roles</div>
+          <div class="status-item">🌍 Open to relocation worldwide</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
-<hr class="divider" />
 
 <!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">Technical Skills</div>
-  <h2>What I Work With</h2>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">🐍</span> Programming</div>
-      <div class="skill-list">
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">SQL</span>
-        <span class="skill-pill">Pandas</span>
-        <span class="skill-pill">NumPy</span>
-        <span class="skill-pill">Scikit-learn</span>
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="section-eyebrow">Technical Skills</div>
+    <h2 class="section-title">What I Work With</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <h4>Programming</h4>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>SQL</li>
+          <li>Pandas & NumPy</li>
+          <li>Scikit-learn</li>
+          <li>R (basic)</li>
+        </ul>
       </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">🧠</span> Machine Learning</div>
-      <div class="skill-list">
-        <span class="skill-pill">PyTorch</span>
-        <span class="skill-pill">TensorFlow</span>
-        <span class="skill-pill">CNN</span>
-        <span class="skill-pill">RNN</span>
-        <span class="skill-pill">SVM</span>
-        <span class="skill-pill">NLP</span>
+      <div class="skill-card">
+        <div class="skill-icon">🧠</div>
+        <h4>Machine Learning</h4>
+        <ul class="skill-list">
+          <li>PyTorch</li>
+          <li>TensorFlow</li>
+          <li>CNN · RNN · SVM</li>
+          <li>Transfer Learning</li>
+          <li>NLP</li>
+        </ul>
       </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">📊</span> Data & Reporting</div>
-      <div class="skill-list">
-        <span class="skill-pill">Excel (Advanced)</span>
-        <span class="skill-pill">Google Sheets</span>
-        <span class="skill-pill">Pivot Tables</span>
-        <span class="skill-pill">Dashboards</span>
-        <span class="skill-pill">EDA</span>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h4>Data & Reporting</h4>
+        <ul class="skill-list">
+          <li>Excel (Advanced)</li>
+          <li>Pivot Tables & Dashboards</li>
+          <li>EDA & Visualisation</li>
+          <li>Data Quality Audits</li>
+          <li>Business Reporting</li>
+        </ul>
       </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">🛠</span> Tools & Platforms</div>
-      <div class="skill-list">
-        <span class="skill-pill">Git / GitHub</span>
-        <span class="skill-pill">Google Colab</span>
-        <span class="skill-pill">VS Code</span>
+      <div class="skill-card">
+        <div class="skill-icon">🛠</div>
+        <h4>Tools & Platforms</h4>
+        <ul class="skill-list">
+          <li>Git / GitHub</li>
+          <li>Google Colab (GPU)</li>
+          <li>Jupyter Notebooks</li>
+          <li>VS Code</li>
+          <li>ERP Systems</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
-
-<hr class="divider" />
 
 <!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Projects</div>
-  <h2>Featured Work</h2>
-
-  <div class="project-card">
-    <span class="project-badge">Computer Vision · Healthcare</span>
-    <div class="project-title">Diabetic Retinopathy Detection using CNN</div>
-    <p class="project-desc">
-      Automated 5-class classification of diabetic retinopathy severity from retinal fundus
-      images. Built using ResNet18 transfer learning in PyTorch — helping clinicians identify
-      DR severity from images in seconds rather than hours.
-    </p>
-    <div class="project-metrics">
-      <div class="metric">
-        <span class="metric-val">83%</span>
-        <span class="metric-label">Test Accuracy</span>
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="section-eyebrow">Featured Work</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-divider"></div>
+    <div class="project-card">
+      <div>
+        <div class="project-eyebrow">Computer Vision · Healthcare · Medical AI</div>
+        <h3>Diabetic Retinopathy Detection using CNN</h3>
+        <p>Automated classification of diabetic retinopathy severity from retinal fundus images using ResNet18 transfer learning in PyTorch — helping clinicians identify DR severity from images in seconds rather than hours.</p>
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="metric-num">83%</div>
+            <div class="metric-label">Test Accuracy</div>
+          </div>
+          <div class="metric">
+            <div class="metric-num">3,662</div>
+            <div class="metric-label">Training Images</div>
+          </div>
+          <div class="metric">
+            <div class="metric-num">5</div>
+            <div class="metric-label">DR Classes</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">PyTorch</span>
+          <span class="project-tag">ResNet18</span>
+          <span class="project-tag">Transfer Learning</span>
+          <span class="project-tag">Computer Vision</span>
+          <span class="project-tag">Medical AI</span>
+        </div>
+        <a href="https://github.com/mariam-madata" target="_blank" class="btn-github">→ View on GitHub</a>
       </div>
-      <div class="metric">
-        <span class="metric-val">3,662</span>
-        <span class="metric-label">Training Images</span>
-      </div>
-      <div class="metric">
-        <span class="metric-val">5</span>
-        <span class="metric-label">DR Classes</span>
-      </div>
-    </div>
-    <div class="project-tags">
-      <span class="project-tag">PyTorch</span>
-      <span class="project-tag">ResNet18</span>
-      <span class="project-tag">Transfer Learning</span>
-      <span class="project-tag">Computer Vision</span>
-      <span class="project-tag">Medical AI</span>
-    </div>
-    <a class="project-link" href="https://github.com/mariam-madata/diabetic-retinopathy-detection" target="_blank">
-      → View on GitHub
-    </a>
-  </div>
-
-PE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mariam Khamis Madata — Data Scientist</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ink:       #0f1923;
-      --ink-soft:  #4a5568;
-      --ink-faint: #8a9ab0;
-      --bg:        #f7f9fb;
-      --card:      #ffffff;
-      --accent:    #1a6b5a;
-      --accent2:   #e8f4f0;
-      --gold:      #c9933a;
-      --border:    #e2e8f0;
-      --font-display: 'DM Serif Display', serif;
-      --font-body:    'Inter', sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: rgba(247,249,251,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      padding: 0 2rem;
-      height: 60px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-name {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--accent);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--ink-soft);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* SECTIONS */
-    section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
-
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding-top: 80px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .hero-tag {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex; align-items: center; gap: 0.6rem;
-    }
-    .hero-tag::before {
-      content: '';
-      display: inline-block;
-      width: 28px; height: 2px;
-      background: var(--accent);
-    }
-    h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.6rem, 6vw, 4.2rem);
-      line-height: 1.12;
-      color: var(--ink);
-      margin-bottom: 1.4rem;
-    }
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-bio {
-      font-size: 1.05rem;
-      color: var(--ink-soft);
-      max-width: 560px;
-      margin-bottom: 2.4rem;
-      line-height: 1.8;
-    }
-    .hero-cta {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.7rem 1.6rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-primary:hover { background: #145548; transform: translateY(-1px); }
-    .btn-outline {
-      border: 1.5px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-    }
-    .btn-outline:hover { background: var(--accent2); }
-
-    .hero-stats {
-      display: flex; gap: 2.5rem; margin-top: 3.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-    .stat-item { display: flex; flex-direction: column; }
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .stat-num span { color: var(--accent); }
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--ink-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 0.3rem;
-    }
-
-    /* SECTION TITLES */
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      color: var(--ink);
-      margin-bottom: 2rem;
-      line-height: 1.2;
-    }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-    .about-text p { color: var(--ink-soft); margin-bottom: 1rem; line-height: 1.8; }
-    .about-interests { }
-    .interest-tag {
-      display: inline-block;
-      background: var(--accent2);
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 500;
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      margin: 0.25rem 0.25rem 0.25rem 0;
-    }
-    .interests-title {
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--ink-faint);
-      margin-bottom: 0.8rem;
-    }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.2rem;
-    }
-    .skill-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.4rem;
-    }
-    .skill-card-title {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: var(--ink);
-      margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .skill-icon { font-size: 1.1rem; }
-    .skill-list {
-      display: flex; flex-wrap: wrap; gap: 0.4rem;
-    }
-    .skill-pill {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: var(--bg);
-      color: var(--ink-soft);
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-    }
-
-    /* PROJECTS */
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.4rem;
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .project-card:hover {
-      box-shadow: 0 8px 32px rgba(26,107,90,0.08);
-      transform: translateY(-2px);
-    }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: var(--accent);
-    }
-    .project-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: var(--accent2);
-      color: var(--accent);
-      padding: 0.2rem 0.7rem;
-      border-radius: 100px;
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .project-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      margin-bottom: 0.6rem;
-      color: var(--ink);
-    }
-    .project-desc {
-      color: var(--ink-soft);
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-      line-height: 1.7;
-    }
-    .project-metrics {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      margin-bottom: 1.2rem;
-    }
-    .metric {
-      display: flex; flex-direction: column;
-    }
-    .metric-val {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .metric-label {
-      font-size: 0.72rem;
-      color: var(--ink-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
-    .project-tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      background: var(--bg);
-      color: var(--ink-soft);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-    }
-    .project-link {
-      font-size: 0.875rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex; align-items: center; gap: 0.3rem;
-    }
-    .project-link:hover { text-decoration: underline; }
-
-    /* PUBLICATION */
-    .pub-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.4rem;
-      align-items: start;
-      transition: box-shadow 0.2s;
-    }
-    .pub-card:hover { box-shadow: 0 8px 32px rgba(26,107,90,0.08); }
-    .pub-icon {
-      width: 48px; height: 48px;
-      background: var(--accent2);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-    }
-    .pub-venue {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-    }
-    .pub-title {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-    .pub-authors {
-      font-size: 0.85rem;
-      color: var(--ink-faint);
-      margin-bottom: 0.8rem;
-    }
-    .pub-authors strong { color: var(--ink-soft); }
-    .pub-abstract {
-      font-size: 0.88rem;
-      color: var(--ink-soft);
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    /* EDUCATION */
-    .edu-timeline { position: relative; padding-left: 1.5rem; }
-    .edu-timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 8px; bottom: 8px;
-      width: 2px; background: var(--border);
-    }
-    .edu-item {
-      position: relative;
-      margin-bottom: 2.4rem;
-    }
-    .edu-item::before {
-      content: '';
-      position: absolute;
-      left: -1.5rem; top: 6px;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--bg);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-    .edu-year {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--ink-faint);
-      margin-bottom: 0.3rem;
-    }
-    .edu-degree {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--ink);
-      margin-bottom: 0.2rem;
-    }
-    .edu-school {
-      font-size: 0.9rem;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 0.4rem;
-    }
-    .edu-detail {
-      font-size: 0.85rem;
-      color: var(--ink-faint);
-    }
-    .edu-badge {
-      display: inline-block;
-      background: #fdf3e3;
-      color: var(--gold);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.2rem 0.65rem;
-      border-radius: 100px;
-      margin-left: 0.5rem;
-    }
-
-    /* CONTACT */
-    #contact {
-      background: var(--ink);
-      color: #fff;
-      max-width: 100%;
-      padding: 5rem 2rem;
-    }
-    .contact-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    #contact .section-label { color: #6ee7b7; }
-    #contact h2 { color: #fff; }
-    #contact p { color: #94a3b8; margin-bottom: 2rem; max-width: 480px; }
-    .contact-links {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-    }
-    .contact-link {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #e2e8f0;
-      padding: 0.75rem 1.4rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .contact-link:hover { background: rgba(255,255,255,0.12); }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
-      color: var(--ink-faint);
-      border-top: 1px solid var(--border);
-    }
-
-    /* DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    @media (max-width: 640px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .pub-card { grid-template-columns: 1fr; }
-      .hero-stats { gap: 1.5rem; }
-      nav .nav-links { display: none; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <a class="nav-name" href="#hero">Mariam Madata</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#publication">Publication</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-tag">Data Scientist · Data Analyst · Tanzania 🇹🇿</div>
-  <h1>Mariam Khamis<br><em>Madata</em></h1>
-  <p class="hero-bio">
-    MSc Data Science graduate building machine learning systems that work in the real world.
-    From wireless network optimization to medical image analysis — I turn data into decisions.
-  </p>
-  <div class="hero-cta">
-    <a href="#projects" class="btn btn-primary">View My Work</a>
-    <a href="#contact" class="btn btn-outline">Get In Touch</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat-item">
-      <span class="stat-num">83<span>%</span></span>
-      <span class="stat-label">Model Accuracy — DR Detection</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">1</span>
-      <span class="stat-label">Peer-Reviewed Publication</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">3<span>+</span></span>
-      <span class="stat-label">Years of Experience</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">5</span>
-      <span class="stat-label">Countries Applied To</span>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About Me</div>
-  <h2>Researcher. Analyst.<br>Problem Solver.</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>
-        I'm a data scientist from Dar es Salaam, Tanzania, with an MSc in Data Science
-        (First Class) from Chandigarh University, India. My work sits at the intersection
-        of machine learning research and real-world data analysis.
-      </p>
-      <p>
-        I've published research on deep learning for wireless networks, built computer
-        vision systems for medical diagnostics, and delivered data insights across
-        telecoms, consulting, and engineering sectors.
-      </p>
-      <p>
-        Currently exploring PhD opportunities in machine learning and AI while working
-        as a data and systems consultant in Dar es Salaam.
-      </p>
-    </div>
-    <div class="about-interests">
-      <div class="interests-title">Research Interests</div>
-      <span class="interest-tag">Deep Learning</span>
-      <span class="interest-tag">Computer Vision</span>
-      <span class="interest-tag">Medical Image Analysis</span>
-      <span class="interest-tag">Reinforcement Learning</span>
-      <span class="interest-tag">Explainable AI</span>
-      <span class="interest-tag">Wireless Networks</span>
-      <span class="interest-tag">Transfer Learning</span>
-      <span class="interest-tag">Data Analytics</span>
-      <br/><br/>
-      <div class="interests-title" style="margin-top:1rem">Currently</div>
-      <p style="font-size:0.88rem; color:var(--ink-soft); line-height:1.7;">
-        📍 Based in Dar es Salaam<br/>
-        🎓 Applying for PhD positions<br/>
-        💻 Open to remote data roles<br/>
-        🌍 Open to relocation worldwide
-      </p>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">Technical Skills</div>
-  <h2>What I Work With</h2>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">🐍</span> Programming</div>
-      <div class="skill-list">
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">SQL</span>
-        <span class="skill-pill">Pandas</span>
-        <span class="skill-pill">NumPy</span>
-        <span class="skill-pill">Scikit-learn</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">🧠</span> Machine Learning</div>
-      <div class="skill-list">
-        <span class="skill-pill">PyTorch</span>
-        <span class="skill-pill">TensorFlow</span>
-        <span class="skill-pill">CNN</span>
-        <span class="skill-pill">RNN</span>
-        <span class="skill-pill">SVM</span>
-        <span class="skill-pill">NLP</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">📊</span> Data & Reporting</div>
-      <div class="skill-list">
-        <span class="skill-pill">Excel (Advanced)</span>
-        <span class="skill-pill">Google Sheets</span>
-        <span class="skill-pill">Pivot Tables</span>
-        <span class="skill-pill">Dashboards</span>
-        <span class="skill-pill">EDA</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-title"><span class="skill-icon">🛠</span> Tools & Platforms</div>
-      <div class="skill-list">
-        <span class="skill-pill">Git / GitHub</span>
-        <span class="skill-pill">Google Colab</span>
-        <span class="skill-pill">VS Code</span>
+      <div class="arch-diagram">
+        <div class="arch-title">Model Architecture</div>
+        <div class="arch-flow">
+          <div class="arch-step">
+            <div class="arch-dot"></div>
+            <div class="arch-box">📷 Retinal Fundus Image Input</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box">🔄 Data Augmentation Pipeline</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box highlight">🧠 ResNet18 (Pretrained — Transfer Learning)</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box">🔗 Custom Fully Connected Layers</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box highlight">✅ DR Severity Classification (5 Classes)</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<hr class="divider" />
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Projects</div>
-  <h2>Featured Work</h2>
-
-  <div class="project-card">
-    <span class="project-badge">Computer Vision · Healthcare</span>
-    <div class="project-title">Diabetic Retinopathy Detection using CNN</div>
-    <p class="project-desc">
-      Automated 5-class classification of diabetic retinopathy severity from retinal fundus
-      images. Built using ResNet18 transfer learning in PyTorch — helping clinicians identify
-      DR severity from images in seconds rather than hours.
-    </p>
-    <div class="project-metrics">
-      <div class="metric">
-        <span class="metric-val">83%</span>
-        <span class="metric-label">Test Accuracy</span>
-      </div>
-      <div class="metric">
-        <span class="metric-val">3,662</span>
-        <span class="metric-label">Training Images</span>
-      </div>
-      <div class="metric">
-        <span class="metric-val">5</span>
-        <span class="metric-label">DR Classes</span>
-      </div>
-    </div>
-    <div class="project-tags">
-      <span class="project-tag">PyTorch</span>
-      <span class="project-tag">ResNet18</span>
-      <span class="project-tag">Transfer Learning</span>
-      <span class="project-tag">Computer Vision</span>
-      <span class="project-tag">Medical AI</span>
-    </div>
-    <a class="project-link" href="https://github.com/mariam-madata/diabetic-retinopathy-detection" target="_blank">
-      → View on GitHub
-    </a>
-  </div>
-
-</section>
-
-<hr class="divider" />
 
 <!-- PUBLICATION -->
-<section id="publication">
-  <div class="section-label">Research</div>
-  <h2>Publication</h2>
-  <div class="pub-card">
-    <div class="pub-icon">📄</div>
-    <div>
-      <div class="pub-venue">IEEE Xplore · 2023</div>
-      <div class="pub-title">Emerging of Machine Learning and Deep Learning Technology: Addressing Intelligent Wireless Network Optimization</div>
-      <div class="pub-authors">
-        <strong>Madata, M.K.</strong>, Hailemariam, K., Yao, A.F.E., Singh, G., Singh, J.
+<section class="publication" id="publication">
+  <div class="container">
+    <div class="section-eyebrow">Research</div>
+    <h2 class="section-title">Publication</h2>
+    <div class="section-divider"></div>
+    <div class="pub-card">
+      <div class="pub-badge">IEEE<span>2023</span></div>
+      <div>
+        <div class="pub-title">Emerging of Machine Learning and Deep Learning Technology: Addressing Intelligent Wireless Network Optimization</div>
+        <div class="pub-authors"><strong>Madata, M.K.</strong>, Hailemariam, K., Yao, A.F.E., Singh, G., Singh, J. — Chandigarh University, 2023</div>
+        <p class="pub-abstract">A comprehensive benchmarking study comparing CNN, RNN, and SVM architectures for wireless network intrusion detection across NSL-KDD, CICIDS2017, and KDDCup99 datasets. Demonstrated CNN accuracy of 99.4% on intrusion detection tasks, with analysis of supervised, unsupervised, and deep learning approaches for real-world network optimisation.</p>
+        <div class="tags" style="margin-bottom:1.2rem">
+          <span class="tag">CNN</span>
+          <span class="tag">RNN</span>
+          <span class="tag">SVM</span>
+          <span class="tag">Deep Learning</span>
+          <span class="tag">Wireless Networks</span>
+        </div>
+        <a href="https://ieeexplore.ieee.org" target="_blank" class="btn-ieee">📄 View on IEEE Xplore</a>
       </div>
-      <p class="pub-abstract">
-        A comprehensive benchmarking study comparing CNN, RNN, and SVM architectures for
-        wireless network intrusion detection across NSL-KDD, CICIDS2017, and KDDCup99 datasets.
-        Demonstrated CNN accuracy of 99.4% on intrusion detection tasks, with analysis of
-        supervised, unsupervised, and deep learning approaches for real-world network optimization.
-      </p>
-      <a class="project-link" href="https://ieeexplore.ieee.org/document/10205650" target="_blank">
-        → View on IEEE Xplore
-      </a>
     </div>
   </div>
 </section>
 
-<hr class="divider" />
-
 <!-- EDUCATION -->
-<section id="education">
-  <div class="section-label">Education</div>
-  <h2>Academic Background</h2>
-  <div class="edu-timeline">
-    <div class="edu-item">
-      <div class="edu-year">2021 – 2023</div>
-      <div class="edu-degree">MSc Data Science <span class="edu-badge">First Class</span></div>
-      <div class="edu-school">Chandigarh University, Mohali, India</div>
-      <div class="edu-detail">CGPA 7.07/10 · Machine Learning · Deep Learning · NLP · Big Data · Statistical Modelling</div>
-    </div>
-    <div class="edu-item">
-      <div class="edu-year">2018 – 2021</div>
-      <div class="edu-degree">BSc Business Information & Communication Technology <span class="edu-badge">Second Upper</span></div>
-      <div class="edu-school">Moshi Cooperative University (MUCOBS), Tanzania</div>
-      <div class="edu-detail">GPA 3.5/5.0 · Database Management · Business Analytics · Networking · Systems Analysis</div>
+<section class="education" id="education">
+  <div class="container">
+    <div class="section-eyebrow">Academic Background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="section-divider"></div>
+    <div class="edu-timeline">
+      <div class="edu-item">
+        <div class="edu-year">2021 – 2023</div>
+        <div>
+          <div class="edu-degree">MSc Data Science</div>
+          <span class="edu-grade">First Class · CGPA 7.07/10</span>
+          <div class="edu-school">Chandigarh University, Mohali, India</div>
+          <div class="edu-modules">Machine Learning · Deep Learning · NLP · Big Data Analytics · Statistical Modelling</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2018 – 2021</div>
+        <div>
+          <div class="edu-degree">BSc Business Information & Communication Technology</div>
+          <span class="edu-grade">Second Upper · GPA 3.5/5.0</span>
+          <div class="edu-school">Moshi Cooperative University (MUCOBS), Tanzania</div>
+          <div class="edu-modules">Database Management · Business Analytics · Networking · Systems Analysis & Design</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="section-label">Contact</div>
-    <h2>Let's Connect</h2>
-    <p>Open to PhD opportunities, research collaborations, remote data roles, and internships worldwide.</p>
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-eyebrow">Let's Connect</div>
+    <h2 class="section-title">Open to Opportunities</h2>
+    <p class="contact-sub">Open to PhD opportunities, research collaborations, remote data roles, and internships worldwide.</p>
     <div class="contact-links">
-      <a class="contact-link" href="mailto:mariammadata98@gmail.com">
-        ✉️ mariammadata98@gmail.com
-      </a>
-      <a class="contact-link" href="https://github.com/mariam-madata" target="_blank">
-        💻 github.com/mariam-madata
-      </a>
-      <a class="contact-link" href="https://linkedin.com/in/mariammadata-183aa7187" target="_blank">
-        🔗 LinkedIn
-      </a>
+      <a href="mailto:mariammadata98@gmail.com" class="contact-link">✉️ mariammadata98@gmail.com</a>
+      <a href="https://github.com/mariam-madata" target="_blank" class="contact-link">💻 github.com/mariam-madata</a>
+      <a href="https://www.linkedin.com/in/mariam-madata-183aa7187" target="_blank" class="contact-link">🔗 LinkedIn</a>
     </div>
   </div>
 </section>
