@@ -605,6 +605,61 @@
         </div>
       </div>
     </div>
+
+    <div class="project-card" style="margin-top:2.5rem">
+      <div>
+        <div class="project-eyebrow">Computer Vision · Wildlife Conservation · Tanzania</div>
+        <h3>Serengeti African Wildlife Classifier</h3>
+        <p>A deep learning model that automatically identifies wildlife species — buffalo, elephant, rhino, and zebra — from camera trap images in Serengeti National Park, built with EfficientNet-B0 transfer learning to support anti-poaching and conservation monitoring efforts.</p>
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="metric-num">96.3%</div>
+            <div class="metric-label">Test Accuracy</div>
+          </div>
+          <div class="metric">
+            <div class="metric-num">0.96</div>
+            <div class="metric-label">Macro F1 Score</div>
+          </div>
+          <div class="metric">
+            <div class="metric-num">1,504</div>
+            <div class="metric-label">Camera Trap Images</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">EfficientNet-B0</span>
+          <span class="project-tag">PyTorch</span>
+          <span class="project-tag">Transfer Learning</span>
+          <span class="project-tag">Computer Vision</span>
+          <span class="project-tag">Wildlife Conservation</span>
+        </div>
+        <a href="https://github.com/mariam-madata/serengeti-wildlife-classifier" target="_blank" class="btn-github">→ View on GitHub</a>
+      </div>
+      <div class="arch-diagram">
+        <div class="arch-title">Model Architecture</div>
+        <div class="arch-flow">
+          <div class="arch-step">
+            <div class="arch-dot"></div>
+            <div class="arch-box">📷 Camera Trap Image Input</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box">🔄 Data Augmentation Pipeline</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box highlight">🧠 EfficientNet-B0 (Pretrained — Transfer Learning)</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box">🔗 Custom Classification Head</div>
+          </div>
+          <div class="arch-step">
+            <div class="arch-arrow">↓</div>
+            <div class="arch-box highlight">✅ Species Classification (4 Classes)</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
